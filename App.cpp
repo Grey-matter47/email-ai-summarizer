@@ -2,27 +2,30 @@
 #include <string>
 #include <thread>
 #include <chrono>
-// #include "api.h"
 #include <fstream>
 #include <curl/curl.h>
 #include <json/json.h>
+#include <atomic> // Include for atomic<bool>
 
 using namespace std;
 
-const string API_KEY = "AIzaSyCpR7hiVbA6PVjz-rXyJ69NZ4k2QrsnJY4";
-const string API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyCpR7hiVbA6PVjz-rXyJ69NZ4k2QrsnJY4";
+const string API_KEY = "AIzaSyBrWYPnBdGi2KC0DfiuxBgyBrnvlcMASqQ"; 
+const string API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" + API_KEY;
 
-void displayLoadingAnimation() {
+void displayLoadingAnimation(atomic<bool>& done) {
     string animation = "|/-\\";
-    for (int i = 0; i < 10; i++) {
+    int i = 0;
+    while (!done) {
         cout << "\rProcessing " << animation[i % 4] << flush;
         this_thread::sleep_for(chrono::milliseconds(300));
+        i++;
     }
+    cout << "\rProcessing Done!       " << endl; // Clear the animation
 }
 
 size_t WriteCallback(void* contents, size_t size, size_t nmemb, string* output) {
     size_t totalSize = size * nmemb;
-    output->append((char*)contents, totalSize);
+    output->append(static_cast<char*>(contents), totalSize); // Use static_cast
     return totalSize;
 }
 
@@ -42,28 +45,45 @@ string summarizeText(const string& text) {
 
     string response;
     struct curl_slist* headers = nullptr;
-    string API_KEY = "AIzaSyCpR7hiVbA6PVjz-rXyJ69NZ4k2QrsnJY4";
-    string API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyCpR7hiVbA6PVjz-rXyJ69NZ4k2QrsnJY4";
 
     headers = curl_slist_append(headers, "Content-Type: application/json");
-    headers = curl_slist_append(headers, ("Authorization: Bearer " + API_KEY).c_str());
 
+    // Constructing the JSON payload
     Json::Value jsonPayload;
-    jsonPayload["text"] = text;
-    jsonPayload["max_length"] = 50;
+    Json::Value contentArray(Json::arrayValue);
+    Json::Value partsArray(Json::arrayValue);
+    Json::Value textPart;
+    
+    textPart["text"] = text;
+    partsArray.append(textPart);
+
+    Json::Value content;
+    content["parts"] = partsArray;
+    contentArray.append(content);
+
+    jsonPayload["contents"] = contentArray;
+
+    // Adding the token limit
+    Json::Value generationConfig;
+    generationConfig["max_output_tokens"] = 50;
+    jsonPayload["generationConfig"] = generationConfig;
+
     Json::StreamWriterBuilder writer;
     string payload = Json::writeString(writer, jsonPayload);
 
+    // Setting up CURL options
     curl_easy_setopt(curl, CURLOPT_URL, API_URL.c_str());
     curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
     curl_easy_setopt(curl, CURLOPT_POST, 1);
     curl_easy_setopt(curl, CURLOPT_POSTFIELDS, payload.c_str());
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
-    
+    curl_easy_setopt(curl, CURLOPT_TIMEOUT, 30L);
+
     CURLcode res = curl_easy_perform(curl);
     if (res != CURLE_OK) {
         cerr << "Curl request failed: " << curl_easy_strerror(res) << endl;
+        response = "Curl request failed: " + string(curl_easy_strerror(res));
     }
 
     curl_easy_cleanup(curl);
@@ -71,13 +91,11 @@ string summarizeText(const string& text) {
     return response;
 }
 
-
-
 int main() {
     string emailContent, pdfText;
-    
+
     cout << "===== Gemini Text Summarizer =====" << endl;
-    
+
     cout << "Enter Email Content (or leave empty if using a file): ";
     getline(cin, emailContent);
 
@@ -100,15 +118,17 @@ int main() {
     }
 
     string combinedText = emailContent + " " + pdfText;
-    
+
     cout << "Summarizing..." << endl;
-    thread loadingThread(displayLoadingAnimation);
-    
+    atomic<bool> done(false);
+    thread loadingThread(displayLoadingAnimation, ref(done));
+
     string summary = summarizeText(combinedText);
-    
-    loadingThread.detach();
+
+    done = true; // Signal the loading thread to stop
+    loadingThread.join(); // Wait for the loading thread to finish
+
     cout << "\nSummary: " << summary << endl;
-    
+
     return 0;
 }
-

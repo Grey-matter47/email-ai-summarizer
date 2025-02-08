@@ -1,0 +1,78 @@
+K R I S H N A K U M A R P A N D E Y
+C O N T A C T : + 9 1 8 2 8 3 8 2 8 2 3 6 , K R I S H N A P A N D E Y 2 2 0 5 @ G M A I L . C O M
+EDUCATION
+M.Tech. Electrical Engineering 2023-25 Netaji Subhas University of Technology
+B.Tech. Instr. & Control Engineering 2019-23 Netaji Subhas University of Technology
+CBSE (Class XII) 2017/18 D.L. D.A.V. Model School, Pitampura Delhi
+CBSE (Class X) 2015 D.L. D.A.V. Model School, Pitampura Delhi
+WORK EXPERIENCE
+Product Engineering Intern,
+B2B Saas Stealth Startup,
+Pune Feb’24-July’24
+• Designed and Implemented Backend Schema:
+Architected the entire backend schema using Node.js and
+MongoDB, ensuring scalable and efficient data
+management. Developed and deployed a robust logging
+service to monitor and analyze application performance and
+user interactions.
+• Developed Advanced UI/UX Features: Engineered
+comprehensive frontend navigation components, including
+bottom and side navigation, using React. Crafted an intuitive
+and visually appealing user interface that enhanced the
+overall user experience.
+• Leveraged Analytics for Insights: Entirely coded the
+Google Analytics (GA) event tracking code, capturing
+detailed user interactions. Used this data from GCP in
+identifying optimal design elements and improving user
+engagement by 20%. Addressed key data queries such as
+identifying the most frequented features by users, analyzing
+drop-off points in user flow, and optimizing the onboarding
+process. Provided actionable insights that led to a 15%
+increase in user retention.
+
+Computer Programmer,
+Centre of Excellence,NeuroEngineering Facility,
+AIIMS Delhi Aug’23-Dec’23
+3D Image Segmentation:
+• Implementing and fine-tuning ML models like U-net
+and V-net to improve 3D organ scans.
+Intraoperative Neurophysiological Monitoring (IONM)
+Technology:
+• Conducting extensive research and staying updated
+on the latest advancements in IONM technology.
+• Analyzing neural activity data during surgeries for
+real-time feedback.
+• Presenting findings to neurosurgical teams to
+enhance surgical outcomes.
+EMGSignal-Based Nerve Monitoring Device:
+• Designing and developing the nerve monitoring
+device based on EMG signals. (re-engineering an
+actual product)
+• Testing and refining the device to provide reliable
+and accurate real-time warnings during surgery.
+
+ACADEMIC PROJECTS
+Stock Future Predicting Model
+• Developed and implemented an LSTM model to predict stock prices using Google stocks data. Utilized RMSE and
+
+MAPE as evaluation metrics to assess model performance and accuracy in forecasting. Gained experience in time-
+series data processing and long-term dependency learning using RNN.
+
+Applications of Transformer Learning in Healthcare
+• Conducted a comprehensive review of transformer-based models in medical image analysis. Highlighted the
+advantages of transformers in managing large-scale medical image datasets for more precise and efficient analysis.
+Morgan Stanley: A Case Study
+• Analyzed the historical split of JP Morgan into commercial and investment banking sectors, which led to the
+formation of Morgan Stanley & Investigated the impact of the Glass-Steagall Act of 1933 on financial markets and
+institutions. Provided an in-depth review of the factors contributing to the 2008 economic meltdown and how
+regulatory changes influenced the financial landscape.
+SKILLS
+• Programming Languages - C++, Python, SQL : Strong understanding of OOP principles, database management
+systems, & RDBMS. Skilled in implementing data structures and algorithms for optimized solutions.
+• Data Analysis & Visualization - Python: Proficient in analyzing complex datasets using libraries such as Pandas,
+NumPy, and Matplotlib to perform data manipulation, cleaning, and visualization. Experienced in writing efficient
+Python scripts for data-driven insights. Version Control: Hands-on experience with Git for collaborative
+development and version control management.
+• Machine Learning & AI- Proficient in applying various Regression and Classification algorithms for predictive
+modeling, including linear/logistic regression, decision trees, and support vector machines. Hands-on experience
+with TensorFlow for building and training deep learning models such as CNNs, RNNs, and LSTMs.
