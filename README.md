@@ -30,3 +30,9 @@ Building a C++ App to Summarize Emails with Gemini 2.0 Flash
 │── 📄 CMakeLists.txt     # Build system config
 │── 📄 README.md          # Instructions & Setup
 ```
+# Installation & Setup
+- 1 Clone the Repository
+```bash
+git clone https://github.com/your-username/cpp-email-summarizer.git
+cd cpp-email-summarizer
+```

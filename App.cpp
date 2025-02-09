@@ -73,7 +73,7 @@ string summarizeText(const string& text) {
     jsonPayload["generationConfig"] = generationConfig;
 
     Json::StreamWriterBuilder writer;
-    string payload = Json::writeString(writer, jsonPayload);prom
+    string payload = Json::writeString(writer, jsonPayload);
 
     // Setting up CURL options
     curl_easy_setopt(curl, CURLOPT_URL, API_URL.c_str());
