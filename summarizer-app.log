@@ -1,0 +1,334 @@
+[2025-02-11 22:45:34] INFO: Program started.
+[2025-02-11 22:45:36] INFO: Input text: Summarise this in 50 words or less: Dear Mr. Shravan,
+
+I hope this email finds you well!
+
+I came across your post about the exciting developments at Inkers.ai, and I was immediately drawn to the innovative work your team is doing in revolutionizing the construction industry with cutting-edge technologies using AI-driven solutions. My name is Krishna Kumar Pandey, and I am currently pursuing a Master's in Electrical Engineering at NSUT, Delhi with a focus on Control Systems. Over the past year, I have been closely following the exceptional work you and your teams have been doing at Inkers.ai and Tresa Motors, and I am truly inspired by the innovation and impact you’ve created in both the AI-driven construction and electric vehicle industries. The recent $3 million funding round you closed with Ashish Kacholia and The School of AI only further fueled my desire to reach out and express my interest in contributing to your work.
+
+A bit about my experience:
+Ultralytics YOLOv11 for Real-Time Object Detection: I worked extensively with YOLOv11 for real-time object detection, applying it to various high-dimensional data sets. I fine-tuned the model for improved accuracy in detection and tracking, which gave me hands-on experience in computer vision that could be applied to your Defects AI solution at Inkers.ai.
+
+AI-based Project at AIIMS: While at AIIMS, I was involved in a LSTM-based project aimed at enhancing neurophysiological monitoring for patients during surgeries. I contributed by building deep learning models to predict neural activity in real-time, which could be applied to improve patient outcomes. This experience reinforced my passion for working on impactful AI-driven solutions that solve critical problems.
+
+Mutelfy Music Streaming Platform: I co-developed Mutelfy, a music streaming startup that utilizes the Spotify's, Youtube's and Amazon's Web API for dynamic music recommendations. My focus has been on machine learning for user behavior analysis and recommendation systems. This project has honed my skills in data science, streaming data, and cross-functional collaboration.
+
+Control Systems Project - H2 Hinfinity LMI Controller Design: I recently completed a H2 Hinfinity LMI (Linear Matrix Inequality) Controller Design project, where I applied multi-variable control theory to design a robust control system for a dynamic system with uncertainties. The project focused on minimizing the impact of external disturbances while maintaining system stability, which is critical for many high-performance applications such as autonomous vehicles. This work gave me a strong foundation in control theory, which I believe can be valuable in optimizing the performance of systems at Tresa Motors and Inkers.ai.
+
+EV Case Study: During my coursework, I conducted a detailed case study on Electric Vehicles (EVs), focusing on the charging infrastructure and battery management systems (BMS) used globally. I researched the different charging standards (CHAdeMO, CCS, Tesla Supercharger) across Japan, China, the US, India, and Europe, and analyzed their impact on EV adoption and infrastructure. I also delved into the various types of lithium-ion batteries used in EVs, their charging/discharging cycles, and the integration of Battery Management Systems to ensure efficiency, longevity, and safety. This work aligns well with the ongoing developments in Tresa Motors' EV platform, and I believe my insights into the global EV landscape could be a valuable asset.
+
+Beyond my professional experience, I have a strong passion for sports, particularly badminton, where I’ve actively participated in tournaments across town. I believe this hobby not only keeps me physically active but also sharpens my strategic thinking, focus, and determination – qualities that I’m eager to bring to Inkers.ai. And I also like to take long Walks (like 50km long) helps me enjoy and absorb the true raw beauty of the place whenever I'm there.
+
+Why I’m excited about Inkers.ai and Tresa Motors:
+At Inkers.ai, I am particularly drawn to your work on Scan-to-BIM technology and Defects AI. Your ability to leverage LiDAR, thermal cameras, and AI for real-time defect detection and milestone tracking is truly groundbreaking. The potential to transform the construction industry using these technologies is incredibly exciting, and I would love the opportunity to contribute to this vision.
+
+At Tresa Motors, the way you are shaping the future of electric vehicles through cutting-edge battery management systems, ADAS, and autonomous vehicle technologies speaks to my passion for sustainable mobility and the future of transportation. I’m eager to contribute to your mission of making electric vehicles more accessible, efficient, and safe.
+
+Why I’m reaching out now:
+Given my background in machine learning, AI, control systems, and electric vehicles, I believe now is the ideal time to reach out to discuss potential opportunities where I can contribute to your incredible work. Whether it’s in a technical, research, or development capacity, I am excited by the chance to bring my skills to Inkers.ai and Tresa Motors and make a tangible impact. (Also I'm in Bangalore exploring the city).
+
+Thank you for your time and consideration. I would love the opportunity to connect further and explore how I can contribute to your innovative teams. Looking forward to hearing from you soon!
+
+Best regards,
+Krishna Kumar Pandey
+
+[LinkedIn Profile] | [Resume Link] | [Email]
+
+Contact: +91 82838 28236 K R I S H N A K U M A R P A N D E Y
+C O N T A C T : + 9 1 8 2 8 3 8 2 8 2 3 6 , K R I S H N A P A N D E Y 2 2 0 5 @ G M A I L . C O M
+EDUCATION
+M.Tech. Electrical Engineering 2023-25 Netaji Subhas University of Technology
+B.Tech. Instr. & Control Engineering 2019-23 Netaji Subhas University of Technology
+CBSE (Class XII) 2017/18 D.L. D.A.V. Model School, Pitampura Delhi
+CBSE (Class X) 2015 D.L. D.A.V. Model School, Pitampura Delhi
+WORK EXPERIENCE
+Product Engineering Intern,
+B2B Saas Stealth Startup,
+Pune Feb’24-July’24
+• Designed and Implemented Backend Schema:
+Architected the entire backend schema using Node.js and
+MongoDB, ensuring scalable and efficient data
+management. Developed and deployed a robust logging
+service to monitor and analyze application performance and
+user interactions.
+• Developed Advanced UI/UX Features: Engineered
+comprehensive frontend navigation components, including
+bottom and side navigation, using React. Crafted an intuitive
+and visually appealing user interface that enhanced the
+overall user experience.
+• Leveraged Analytics for Insights: Entirely coded the
+Google Analytics (GA) event tracking code, capturing
+detailed user interactions. Used this data from GCP in
+identifying optimal design elements and improving user
+engagement by 20%. Addressed key data queries such as
+identifying the most frequented features by users, analyzing
+drop-off points in user flow, and optimizing the onboarding
+process. Provided actionable insights that led to a 15%
+increase in user retention.
+
+Computer Programmer,
+Centre of Excellence,NeuroEngineering Facility,
+AIIMS Delhi Aug’23-Dec’23
+3D Image Segmentation:
+• Implementing and fine-tuning ML models like U-net
+and V-net to improve 3D organ scans.
+Intraoperative Neurophysiological Monitoring (IONM)
+Technology:
+• Conducting extensive research and staying updated
+on the latest advancements in IONM technology.
+• Analyzing neural activity data during surgeries for
+real-time feedback.
+• Presenting findings to neurosurgical teams to
+enhance surgical outcomes.
+EMGSignal-Based Nerve Monitoring Device:
+• Designing and developing the nerve monitoring
+device based on EMG signals. (re-engineering an
+actual product)
+• Testing and refining the device to provide reliable
+and accurate real-time warnings during surgery.
+
+ACADEMIC PROJECTS
+Stock Future Predicting Model
+• Developed and implemented an LSTM model to predict stock prices using Google stocks data. Utilized RMSE and
+
+MAPE as evaluation metrics to assess model performance and accuracy in forecasting. Gained experience in time-
+series data processing and long-term dependency learning using RNN.
+
+Applications of Transformer Learning in Healthcare
+• Conducted a comprehensive review of transformer-based models in medical image analysis. Highlighted the
+advantages of transformers in managing large-scale medical image datasets for more precise and efficient analysis.
+Morgan Stanley: A Case Study
+• Analyzed the historical split of JP Morgan into commercial and investment banking sectors, which led to the
+formation of Morgan Stanley & Investigated the impact of the Glass-Steagall Act of 1933 on financial markets and
+institutions. Provided an in-depth review of the factors contributing to the 2008 economic meltdown and how
+regulatory changes influenced the financial landscape.
+SKILLS
+• Programming Languages - C++, Python, SQL : Strong understanding of OOP principles, database management
+systems, & RDBMS. Skilled in implementing data structures and algorithms for optimized solutions.
+• Data Analysis & Visualization - Python: Proficient in analyzing complex datasets using libraries such as Pandas,
+NumPy, and Matplotlib to perform data manipulation, cleaning, and visualization. Experienced in writing efficient
+Python scripts for data-driven insights. Version Control: Hands-on experience with Git for collaborative
+development and version control management.
+• Machine Learning & AI- Proficient in applying various Regression and Classification algorithms for predictive
+modeling, including linear/logistic regression, decision trees, and support vector machines. Hands-on experience
+with TensorFlow for building and training deep learning models such as CNNs, RNNs, and LSTMs.
+[2025-02-11 22:45:37] INFO: Output summary: Krishna Kumar Pandey, an Electrical Engineering Master's student, is impressed by Inkers.ai and Tresa Motors' AI innovation. He highlights his experience with YOLOv11, AIIMS neuro-monitoring, Mutelfy music platform, control systems, and EV case studies. He seeks opportunities to contribute his machine learning, AI, and control systems skills to their impactful work.
+
+[2025-02-11 22:45:38] INFO: Final Summary: Krishna Kumar Pandey, an Electrical Engineering Master's student, is impressed by Inkers.ai and Tresa Motors' AI innovation. He highlights his experience with YOLOv11, AIIMS neuro-monitoring, Mutelfy music platform, control systems, and EV case studies. He seeks opportunities to contribute his machine learning, AI, and control systems skills to their impactful work.
+
+[2025-02-11 22:45:38] INFO: Program finished.
+[2025-02-11 22:45:46] INFO: Program started.
+[2025-02-11 22:45:50] INFO: Input text: Summarise this in 50 words or less: hi why
+[2025-02-11 22:45:52] INFO: Output summary: "Hi why" is an extremely brief and ambiguous question. It likely indicates the person is curious or confused about something previously mentioned or observed, and is prompting further explanation or clarification.
+
+[2025-02-11 22:45:52] INFO: Final Summary: "Hi why" is an extremely brief and ambiguous question. It likely indicates the person is curious or confused about something previously mentioned or observed, and is prompting further explanation or clarification.
+
+[2025-02-11 22:45:52] INFO: Program finished.
+[2025-02-11 22:46:32] INFO: Program started.
+[2025-02-11 22:46:41] INFO: Input text: Summarise this in 50 words or less: Is this really Happening ? K R I S H N A K U M A R P A N D E Y
+C O N T A C T : + 9 1 8 2 8 3 8 2 8 2 3 6 , K R I S H N A P A N D E Y 2 2 0 5 @ G M A I L . C O M
+EDUCATION
+M.Tech. Electrical Engineering 2023-25 Netaji Subhas University of Technology
+B.Tech. Instr. & Control Engineering 2019-23 Netaji Subhas University of Technology
+CBSE (Class XII) 2017/18 D.L. D.A.V. Model School, Pitampura Delhi
+CBSE (Class X) 2015 D.L. D.A.V. Model School, Pitampura Delhi
+WORK EXPERIENCE
+Product Engineering Intern,
+B2B Saas Stealth Startup,
+Pune Feb’24-July’24
+• Designed and Implemented Backend Schema:
+Architected the entire backend schema using Node.js and
+MongoDB, ensuring scalable and efficient data
+management. Developed and deployed a robust logging
+service to monitor and analyze application performance and
+user interactions.
+• Developed Advanced UI/UX Features: Engineered
+comprehensive frontend navigation components, including
+bottom and side navigation, using React. Crafted an intuitive
+and visually appealing user interface that enhanced the
+overall user experience.
+• Leveraged Analytics for Insights: Entirely coded the
+Google Analytics (GA) event tracking code, capturing
+detailed user interactions. Used this data from GCP in
+identifying optimal design elements and improving user
+engagement by 20%. Addressed key data queries such as
+identifying the most frequented features by users, analyzing
+drop-off points in user flow, and optimizing the onboarding
+process. Provided actionable insights that led to a 15%
+increase in user retention.
+
+Computer Programmer,
+Centre of Excellence,NeuroEngineering Facility,
+AIIMS Delhi Aug’23-Dec’23
+3D Image Segmentation:
+• Implementing and fine-tuning ML models like U-net
+and V-net to improve 3D organ scans.
+Intraoperative Neurophysiological Monitoring (IONM)
+Technology:
+• Conducting extensive research and staying updated
+on the latest advancements in IONM technology.
+• Analyzing neural activity data during surgeries for
+real-time feedback.
+• Presenting findings to neurosurgical teams to
+enhance surgical outcomes.
+EMGSignal-Based Nerve Monitoring Device:
+• Designing and developing the nerve monitoring
+device based on EMG signals. (re-engineering an
+actual product)
+• Testing and refining the device to provide reliable
+and accurate real-time warnings during surgery.
+
+ACADEMIC PROJECTS
+Stock Future Predicting Model
+• Developed and implemented an LSTM model to predict stock prices using Google stocks data. Utilized RMSE and
+
+MAPE as evaluation metrics to assess model performance and accuracy in forecasting. Gained experience in time-
+series data processing and long-term dependency learning using RNN.
+
+Applications of Transformer Learning in Healthcare
+• Conducted a comprehensive review of transformer-based models in medical image analysis. Highlighted the
+advantages of transformers in managing large-scale medical image datasets for more precise and efficient analysis.
+Morgan Stanley: A Case Study
+• Analyzed the historical split of JP Morgan into commercial and investment banking sectors, which led to the
+formation of Morgan Stanley & Investigated the impact of the Glass-Steagall Act of 1933 on financial markets and
+institutions. Provided an in-depth review of the factors contributing to the 2008 economic meltdown and how
+regulatory changes influenced the financial landscape.
+SKILLS
+• Programming Languages - C++, Python, SQL : Strong understanding of OOP principles, database management
+systems, & RDBMS. Skilled in implementing data structures and algorithms for optimized solutions.
+• Data Analysis & Visualization - Python: Proficient in analyzing complex datasets using libraries such as Pandas,
+NumPy, and Matplotlib to perform data manipulation, cleaning, and visualization. Experienced in writing efficient
+Python scripts for data-driven insights. Version Control: Hands-on experience with Git for collaborative
+development and version control management.
+• Machine Learning & AI- Proficient in applying various Regression and Classification algorithms for predictive
+modeling, including linear/logistic regression, decision trees, and support vector machines. Hands-on experience
+with TensorFlow for building and training deep learning models such as CNNs, RNNs, and LSTMs.
+[2025-02-11 22:46:44] INFO: Output summary: Krishna Kumar Pandey, an M.Tech Electrical Engineering graduate from NSUT, seeks opportunities leveraging experience in software development and machine learning. He has experience at a stealth startup and AIIMS Delhi, with skills in Python, data analysis, and deep learning.  Projects include stock prediction and healthcare applications.
+
+[2025-02-11 22:46:44] INFO: Final Summary: Krishna Kumar Pandey, an M.Tech Electrical Engineering graduate from NSUT, seeks opportunities leveraging experience in software development and machine learning. He has experience at a stealth startup and AIIMS Delhi, with skills in Python, data analysis, and deep learning.  Projects include stock prediction and healthcare applications.
+
+[2025-02-11 22:46:44] INFO: Program finished.
+[2025-02-11 22:57:21] INFO: Program started.
+[2025-02-11 22:57:22] INFO: Input text: Summarise this in 50 words or less: Dear Mr. Shravan,
+
+I hope this email finds you well!
+
+I came across your post about the exciting developments at Inkers.ai, and I was immediately drawn to the innovative work your team is doing in revolutionizing the construction industry with cutting-edge technologies using AI-driven solutions. My name is Krishna Kumar Pandey, and I am currently pursuing a Master's in Electrical Engineering at NSUT, Delhi with a focus on Control Systems. Over the past year, I have been closely following the exceptional work you and your teams have been doing at Inkers.ai and Tresa Motors, and I am truly inspired by the innovation and impact you’ve created in both the AI-driven construction and electric vehicle industries. The recent $3 million funding round you closed with Ashish Kacholia and The School of AI only further fueled my desire to reach out and express my interest in contributing to your work.
+
+A bit about my experience:
+Ultralytics YOLOv11 for Real-Time Object Detection: I worked extensively with YOLOv11 for real-time object detection, applying it to various high-dimensional data sets. I fine-tuned the model for improved accuracy in detection and tracking, which gave me hands-on experience in computer vision that could be applied to your Defects AI solution at Inkers.ai.
+
+AI-based Project at AIIMS: While at AIIMS, I was involved in a LSTM-based project aimed at enhancing neurophysiological monitoring for patients during surgeries. I contributed by building deep learning models to predict neural activity in real-time, which could be applied to improve patient outcomes. This experience reinforced my passion for working on impactful AI-driven solutions that solve critical problems.
+
+Mutelfy Music Streaming Platform: I co-developed Mutelfy, a music streaming startup that utilizes the Spotify's, Youtube's and Amazon's Web API for dynamic music recommendations. My focus has been on machine learning for user behavior analysis and recommendation systems. This project has honed my skills in data science, streaming data, and cross-functional collaboration.
+
+Control Systems Project - H2 Hinfinity LMI Controller Design: I recently completed a H2 Hinfinity LMI (Linear Matrix Inequality) Controller Design project, where I applied multi-variable control theory to design a robust control system for a dynamic system with uncertainties. The project focused on minimizing the impact of external disturbances while maintaining system stability, which is critical for many high-performance applications such as autonomous vehicles. This work gave me a strong foundation in control theory, which I believe can be valuable in optimizing the performance of systems at Tresa Motors and Inkers.ai.
+
+EV Case Study: During my coursework, I conducted a detailed case study on Electric Vehicles (EVs), focusing on the charging infrastructure and battery management systems (BMS) used globally. I researched the different charging standards (CHAdeMO, CCS, Tesla Supercharger) across Japan, China, the US, India, and Europe, and analyzed their impact on EV adoption and infrastructure. I also delved into the various types of lithium-ion batteries used in EVs, their charging/discharging cycles, and the integration of Battery Management Systems to ensure efficiency, longevity, and safety. This work aligns well with the ongoing developments in Tresa Motors' EV platform, and I believe my insights into the global EV landscape could be a valuable asset.
+
+Beyond my professional experience, I have a strong passion for sports, particularly badminton, where I’ve actively participated in tournaments across town. I believe this hobby not only keeps me physically active but also sharpens my strategic thinking, focus, and determination – qualities that I’m eager to bring to Inkers.ai. And I also like to take long Walks (like 50km long) helps me enjoy and absorb the true raw beauty of the place whenever I'm there.
+
+Why I’m excited about Inkers.ai and Tresa Motors:
+At Inkers.ai, I am particularly drawn to your work on Scan-to-BIM technology and Defects AI. Your ability to leverage LiDAR, thermal cameras, and AI for real-time defect detection and milestone tracking is truly groundbreaking. The potential to transform the construction industry using these technologies is incredibly exciting, and I would love the opportunity to contribute to this vision.
+
+At Tresa Motors, the way you are shaping the future of electric vehicles through cutting-edge battery management systems, ADAS, and autonomous vehicle technologies speaks to my passion for sustainable mobility and the future of transportation. I’m eager to contribute to your mission of making electric vehicles more accessible, efficient, and safe.
+
+Why I’m reaching out now:
+Given my background in machine learning, AI, control systems, and electric vehicles, I believe now is the ideal time to reach out to discuss potential opportunities where I can contribute to your incredible work. Whether it’s in a technical, research, or development capacity, I am excited by the chance to bring my skills to Inkers.ai and Tresa Motors and make a tangible impact. (Also I'm in Bangalore exploring the city).
+
+Thank you for your time and consideration. I would love the opportunity to connect further and explore how I can contribute to your innovative teams. Looking forward to hearing from you soon!
+
+Best regards,
+Krishna Kumar Pandey
+
+[LinkedIn Profile] | [Resume Link] | [Email]
+
+Contact: +91 82838 28236 K R I S H N A K U M A R P A N D E Y
+C O N T A C T : + 9 1 8 2 8 3 8 2 8 2 3 6 , K R I S H N A P A N D E Y 2 2 0 5 @ G M A I L . C O M
+EDUCATION
+M.Tech. Electrical Engineering 2023-25 Netaji Subhas University of Technology
+B.Tech. Instr. & Control Engineering 2019-23 Netaji Subhas University of Technology
+CBSE (Class XII) 2017/18 D.L. D.A.V. Model School, Pitampura Delhi
+CBSE (Class X) 2015 D.L. D.A.V. Model School, Pitampura Delhi
+WORK EXPERIENCE
+Product Engineering Intern,
+B2B Saas Stealth Startup,
+Pune Feb’24-July’24
+• Designed and Implemented Backend Schema:
+Architected the entire backend schema using Node.js and
+MongoDB, ensuring scalable and efficient data
+management. Developed and deployed a robust logging
+service to monitor and analyze application performance and
+user interactions.
+• Developed Advanced UI/UX Features: Engineered
+comprehensive frontend navigation components, including
+bottom and side navigation, using React. Crafted an intuitive
+and visually appealing user interface that enhanced the
+overall user experience.
+• Leveraged Analytics for Insights: Entirely coded the
+Google Analytics (GA) event tracking code, capturing
+detailed user interactions. Used this data from GCP in
+identifying optimal design elements and improving user
+engagement by 20%. Addressed key data queries such as
+identifying the most frequented features by users, analyzing
+drop-off points in user flow, and optimizing the onboarding
+process. Provided actionable insights that led to a 15%
+increase in user retention.
+
+Computer Programmer,
+Centre of Excellence,NeuroEngineering Facility,
+AIIMS Delhi Aug’23-Dec’23
+3D Image Segmentation:
+• Implementing and fine-tuning ML models like U-net
+and V-net to improve 3D organ scans.
+Intraoperative Neurophysiological Monitoring (IONM)
+Technology:
+• Conducting extensive research and staying updated
+on the latest advancements in IONM technology.
+• Analyzing neural activity data during surgeries for
+real-time feedback.
+• Presenting findings to neurosurgical teams to
+enhance surgical outcomes.
+EMGSignal-Based Nerve Monitoring Device:
+• Designing and developing the nerve monitoring
+device based on EMG signals. (re-engineering an
+actual product)
+• Testing and refining the device to provide reliable
+and accurate real-time warnings during surgery.
+
+ACADEMIC PROJECTS
+Stock Future Predicting Model
+• Developed and implemented an LSTM model to predict stock prices using Google stocks data. Utilized RMSE and
+
+MAPE as evaluation metrics to assess model performance and accuracy in forecasting. Gained experience in time-
+series data processing and long-term dependency learning using RNN.
+
+Applications of Transformer Learning in Healthcare
+• Conducted a comprehensive review of transformer-based models in medical image analysis. Highlighted the
+advantages of transformers in managing large-scale medical image datasets for more precise and efficient analysis.
+Morgan Stanley: A Case Study
+• Analyzed the historical split of JP Morgan into commercial and investment banking sectors, which led to the
+formation of Morgan Stanley & Investigated the impact of the Glass-Steagall Act of 1933 on financial markets and
+institutions. Provided an in-depth review of the factors contributing to the 2008 economic meltdown and how
+regulatory changes influenced the financial landscape.
+SKILLS
+• Programming Languages - C++, Python, SQL : Strong understanding of OOP principles, database management
+systems, & RDBMS. Skilled in implementing data structures and algorithms for optimized solutions.
+• Data Analysis & Visualization - Python: Proficient in analyzing complex datasets using libraries such as Pandas,
+NumPy, and Matplotlib to perform data manipulation, cleaning, and visualization. Experienced in writing efficient
+Python scripts for data-driven insights. Version Control: Hands-on experience with Git for collaborative
+development and version control management.
+• Machine Learning & AI- Proficient in applying various Regression and Classification algorithms for predictive
+modeling, including linear/logistic regression, decision trees, and support vector machines. Hands-on experience
+with TensorFlow for building and training deep learning models such as CNNs, RNNs, and LSTMs.
+[2025-02-11 22:57:24] INFO: Output summary: Krishna Kumar Pandey, a Masters student in Electrical Engineering, is highly interested in contributing to Inkers.ai and Tresa Motors, inspired by their AI and EV innovations. He has experience in real-time object detection (YOLOv11), AI-based neurophysiological monitoring, machine learning for music recommendations, and control systems design. He is currently in Bangalore and seeking related opportunities.
+
+[2025-02-11 22:57:25] INFO: Final Summary: Krishna Kumar Pandey, a Masters student in Electrical Engineering, is highly interested in contributing to Inkers.ai and Tresa Motors, inspired by their AI and EV innovations. He has experience in real-time object detection (YOLOv11), AI-based neurophysiological monitoring, machine learning for music recommendations, and control systems design. He is currently in Bangalore and seeking related opportunities.
+
+[2025-02-11 22:57:25] INFO: Program finished.
+[2025-02-11 22:57:29] INFO: Program started.
+[2025-02-11 22:57:35] INFO: Input text: Summarise this in 50 words or less: . .
+[2025-02-11 22:57:37] INFO: Output summary: Please provide the text you would like me to summarize. I need the text to be able to help you.
+
+[2025-02-11 22:57:37] INFO: Final Summary: Please provide the text you would like me to summarize. I need the text to be able to help you.
+
+[2025-02-11 22:57:37] INFO: Program finished.

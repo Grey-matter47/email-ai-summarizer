@@ -3,71 +3,121 @@
 #include <thread>
 #include <chrono>
 #include <fstream>
+#include <sstream>
 #include <curl/curl.h>
-#include <unistd.h> // For getcwd()
-#include <limits.h> // For PATH_MAX
+#include <unistd.h>    // For getcwd()
+#include <limits.h>    // For PATH_MAX
 #include <json/json.h>
-#include <atomic> // Include for atomic<bool>
-#include <ctime>   // For time_t, time, and ctime
-#include <iomanip> // For put_time
+#include <atomic>      // For atomic<bool>
+#include <ctime>       // For time_t, time, and ctime
+#include <iomanip>     // For put_time
+#include <cctype>      // For tolower
 
 using namespace std;
 
-const string API_KEY = "AIzaSyBrWYPnBdGi2KC0DfiuxBgyBrnvlcMASqQ";
-const string API_URL =
-    "https://generativelanguage.googleapis.com/v1beta/models/"
-    "gemini-2.0-flash:generateContent?key=" +
-    API_KEY;
+//---------------------------------------------------------------------
+// Logger Class Definition
+//---------------------------------------------------------------------
 
-// Global log file stream
-fstream logFile("summarizer-app.log", ios::app);
+// Enum to represent log levels
+enum LogLevel { DEBUG, INFO, WARNING, ERROR, CRITICAL };
 
-// Function to log messages with timestamp
-void logMessage(const string &message) {
-    if (!logFile.is_open()) {  // Check if the file is open
-        logFile.open("/tmp/summarizer-app.log", ios::app); // Open it if it's not
-        if (!logFile.is_open()) { // Check if file could be opened
-            cerr << "Error: Could not open log file." << endl;
-            return;
+class Logger {
+public:
+    // Constructor: Opens the log file in append mode
+    Logger(const string &filename) {
+        logFile.open(filename, ios::app);
+        if (!logFile.is_open()) {
+            cerr << "Error opening log file." << endl;
         }
     }
-    cout << "logMessage called!" << endl; 
-    time_t currentTime = time(0);
-    logFile << put_time(localtime(&currentTime), "%F %T") << " - " << message << endl;
-    logFile.flush();
-    // cout << "Just checking if its written in logfile!" << currentTime<<"   "<< message<< endl; 
+    
+    // Destructor: Closes the log file
+    ~Logger() { logFile.close(); }
 
-}
+    // Logs a message with a given log level
+    void log(LogLevel level, const string &message) {
+        // Get current timestamp
+        time_t now = time(0);
+        tm *timeinfo = localtime(&now);
+        char timestamp[20];
+        strftime(timestamp, sizeof(timestamp), "%Y-%m-%d %H:%M:%S", timeinfo);
 
+        // Create log entry
+        ostringstream logEntry;
+        logEntry << "[" << timestamp << "] "
+                 << levelToString(level) << ": " << message << endl;
+
+        // Output to console
+        cout << logEntry.str();
+
+        // Output to log file if it's open
+        if (logFile.is_open()) {
+            logFile << logEntry.str();
+            logFile.flush(); // Ensure immediate write to file
+        }
+    }
+
+private:
+    ofstream logFile; // File stream for the log file
+
+    // Converts log level to a string for output
+    string levelToString(LogLevel level) {
+        switch(level) {
+            case DEBUG:    return "DEBUG";
+            case INFO:     return "INFO";
+            case WARNING:  return "WARNING";
+            case ERROR:    return "ERROR";
+            case CRITICAL: return "CRITICAL";
+            default:       return "UNKNOWN";
+        }
+    }
+};
+
+// Instantiate a global logger (you can also pass this around if needed)
+Logger logger("./../summarizer-app.log");
+
+//---------------------------------------------------------------------
+// Gemini Summarizer Code
+//---------------------------------------------------------------------
+
+const string API_KEY = "AIzaSyBrWYPnBdGi2KC0DfiuxBgyBrnvlcMASqQ";
+const string API_URL =
+    "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" + API_KEY;
+
+// Displays a simple loading animation while waiting for the API response.
 void displayLoadingAnimation(atomic<bool> &done) {
-  string animation = "|/-\\";
-  int i = 0;
-  while (!done) {
-    cout << "\rProcessing " << animation[i % 4] << flush;
-    this_thread::sleep_for(chrono::milliseconds(300));
-    i++;
-  }
-  cout << "\rProcessing Done!       " << endl; // Clear the animation
+    string animation = "|/-\\";
+    int i = 0;
+    while (!done) {
+        cout << "\rProcessing " << animation[i % 4] << flush;
+        this_thread::sleep_for(chrono::milliseconds(300));
+        i++;
+    }
+    cout << "\rProcessing Done!       " << endl;
 }
 
+// Callback function used by libcurl to write received data into a string.
 size_t WriteCallback(void *contents, size_t size, size_t nmemb, string *output) {
-  size_t totalSize = size * nmemb;
-  output->append(static_cast<char *>(contents), totalSize); // Use static_cast
-  return totalSize;
+    size_t totalSize = size * nmemb;
+    output->append(static_cast<char*>(contents), totalSize);
+    return totalSize;
 }
 
+// Reads a text file from a relative path.
 string readTextFile(const string &filename) {
-  ifstream file("./../" + filename); // Replace with the actual path
-  cout << "\nWassup bitch still not\n";
-  if (!file) {
-    cerr << "Error: Could not open file " << filename << endl;
-    logMessage("Error: Could not open file " + filename);
-    return "";
-  }
-  string content((istreambuf_iterator<char>(file)), istreambuf_iterator<char>());
-  return content;
+    ifstream file("./../" + filename);
+    if (!file) {
+        string err = "Error: Could not open file " + filename;
+        cerr << err << endl;
+        logger.log(ERROR, err);
+        return "";
+    }
+    string content((istreambuf_iterator<char>(file)), istreambuf_iterator<char>());
+    return content;
 }
 
+// Structure to hold the summarization results.
 struct SummaryResult {
     string summaryText;
     int promptTokenCount;
@@ -75,205 +125,188 @@ struct SummaryResult {
     string modelVersion;
 };
 
+// Summarizes the given text using the Gemini API.
 SummaryResult summarizeText(const string &text) {
-  logMessage("Input text: " + text); // Log input text
+    logger.log(INFO, "Input text: " + text);
 
-  CURL *curl = curl_easy_init();
+    CURL *curl = curl_easy_init();
     if (!curl) {
-        logMessage("Curl initialization failed");
-        // Return an empty SummaryResult to indicate failure.
-        return SummaryResult{}; // This creates a default-initialized SummaryResult
+        logger.log(ERROR, "Curl initialization failed");
+        return SummaryResult{};
     }
-  string response;
-  struct curl_slist *headers = nullptr;
+    string response;
+    struct curl_slist *headers = nullptr;
+    headers = curl_slist_append(headers, "Content-Type: application/json");
 
-  headers = curl_slist_append(headers, "Content-Type: application/json");
+    // Constructing the JSON payload.
+    Json::Value jsonPayload;
+    Json::Value contentArray(Json::arrayValue);
+    Json::Value partsArray(Json::arrayValue);
+    Json::Value textPart;
+    textPart["text"] = text;
+    partsArray.append(textPart);
+    Json::Value content;
+    content["parts"] = partsArray;
+    contentArray.append(content);
+    jsonPayload["contents"] = contentArray;
 
-  // Constructing the JSON payload
-  Json::Value jsonPayload;
-  Json::Value contentArray(Json::arrayValue);
-  Json::Value partsArray(Json::arrayValue);
-  Json::Value textPart;
+    // Adding generation configuration
+    Json::Value generationConfig;
+    generationConfig["max_output_tokens"] = 100;
+    generationConfig["temperature"] = 1.0;
+    jsonPayload["generationConfig"] = generationConfig;
 
-  textPart["text"] = text;
-  partsArray.append(textPart);
+    Json::StreamWriterBuilder writer;
+    string payload = Json::writeString(writer, jsonPayload);
 
-  Json::Value content;
-  content["parts"] = partsArray;
-  contentArray.append(content);
+    // Setting up CURL options
+    curl_easy_setopt(curl, CURLOPT_URL, API_URL.c_str());
+    curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+    curl_easy_setopt(curl, CURLOPT_POST, 1);
+    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, payload.c_str());
+    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+    curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
+    curl_easy_setopt(curl, CURLOPT_TIMEOUT, 30L); // Prevent indefinite hanging
 
-  jsonPayload["contents"] = contentArray;
+    CURLcode res = curl_easy_perform(curl);
+    SummaryResult result;
 
-  // Adding the token limit
-  Json::Value generationConfig;
-  generationConfig["max_output_tokens"] = 100;
-  generationConfig["temperature"] = 1.0;
-  jsonPayload["generationConfig"] = generationConfig;
+    if (res != CURLE_OK) {
+        string err = "Curl request failed: " + string(curl_easy_strerror(res));
+        cerr << err << endl;
+        logger.log(ERROR, err);
+        response = err;
+    }
 
-  Json::StreamWriterBuilder writer;
-  string payload = Json::writeString(writer, jsonPayload);
+    if (res == CURLE_OK) {
+        try {
+            Json::Value root;
+            Json::CharReaderBuilder builder;
+            JSONCPP_STRING errors;
+            std::istringstream responseStream(response);
+            Json::parseFromStream(builder, responseStream, &root, &errors);
 
-  // Setting up CURL options
-  curl_easy_setopt(curl, CURLOPT_URL, API_URL.c_str());
-  curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
-  curl_easy_setopt(curl, CURLOPT_POST, 1);
-  curl_easy_setopt(curl, CURLOPT_POSTFIELDS, payload.c_str());
-  curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
-  curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
-  curl_easy_setopt(curl, CURLOPT_TIMEOUT, 30L); // Setting a timeout to prevent indefinite hanging
+            string summaryText;
+            int promptTokenCount = 0;
+            int candidatesTokenCount = 0;
+            string modelVersion;
 
-  CURLcode res = curl_easy_perform(curl);
-  SummaryResult result;
+            if (!root.empty() && root.isObject()) {
+                if (root.isMember("candidates") && root["candidates"].isArray() &&
+                    root["candidates"].size() > 0) {
+                    Json::Value candidate = root["candidates"][0]; // Get first candidate
+                    if (candidate.isMember("content") &&
+                        candidate["content"].isObject() &&
+                        candidate["content"].isMember("parts") &&
+                        candidate["content"]["parts"].isArray() &&
+                        candidate["content"]["parts"].size() > 0) {
+                        Json::Value part = candidate["content"]["parts"][0];
+                        if (part.isMember("text") && part["text"].isString()) {
+                            summaryText = part["text"].asString();
+                        }
+                    }
+                }
 
-  if (res!= CURLE_OK) {
-    cerr << "Curl request failed: " << curl_easy_strerror(res) << endl;
-    logMessage("Curl request failed: " + string(curl_easy_strerror(res)));
-    response = "Curl request failed: " + string(curl_easy_strerror(res));
-  }
+                if (root.isMember("usageMetadata") && root["usageMetadata"].isObject()) {
+                    Json::Value usage = root["usageMetadata"];
+                    if (usage.isMember("promptTokenCount") && usage["promptTokenCount"].isInt()) {
+                        promptTokenCount = usage["promptTokenCount"].asInt();
+                    }
+                    if (usage.isMember("candidatesTokenCount") && usage["candidatesTokenCount"].isInt()) {
+                        candidatesTokenCount = usage["candidatesTokenCount"].asInt();
+                        if (candidatesTokenCount >= 100)
+                            logger.log(WARNING, "Summary is more than 50 Words");
+                    }
+                }
 
-  if (res == CURLE_OK) {
-    try {
-      Json::Value root;
-      Json::CharReaderBuilder builder;
-      Json::String errors;
-      std::istringstream responseStream(response);
-      Json::parseFromStream(builder, responseStream, &root, &errors);
-    string summaryText;
-    int promptTokenCount = 0;
-    int candidatesTokenCount = 0;
-    string modelVersion;
-
-      if (!root.empty() && root.isObject()) {
-        if (root.isMember("candidates") && root["candidates"].isArray() &&
-            root["candidates"].size() > 0) {
-          Json::Value candidate = root["candidates"][0]; // Get the first candidate
-          if (candidate.isMember("content") &&
-              candidate["content"].isObject() &&
-              candidate["content"].isMember("parts") &&
-              candidate["content"]["parts"].isArray() &&
-              candidate["content"]["parts"].size() > 0) {
-            Json::Value part = candidate["content"]["parts"][0];
-            if (part.isMember("text") && part["text"].isString()) {
-              summaryText = part["text"].asString();
+                if (root.isMember("modelVersion") && root["modelVersion"].isString()) {
+                    modelVersion = root["modelVersion"].asString();
+                }
+            } else {
+                string err = "Error: Could not parse JSON response.";
+                cerr << err << endl;
+                logger.log(ERROR, err);
+                cerr << "Response: " << response << endl;
             }
-          }
+            result.summaryText = summaryText;
+            result.promptTokenCount = promptTokenCount;
+            result.candidatesTokenCount = candidatesTokenCount;
+            result.modelVersion = modelVersion;
+        } catch (const Json::LogicError &e) {
+            string err = "JSON parsing error: " + string(e.what());
+            cerr << err << endl;
+            logger.log(ERROR, err);
+            cerr << "Response: " << response << endl;
         }
-
-        if (root.isMember("usageMetadata") &&
-            root["usageMetadata"].isObject()) {
-          Json::Value usage = root["usageMetadata"];
-          if (usage.isMember("promptTokenCount") &&
-              usage["promptTokenCount"].isInt()) {
-            promptTokenCount = usage["promptTokenCount"].asInt();
-          }
-          if (usage.isMember("candidatesTokenCount") &&
-              usage["candidatesTokenCount"].isInt()) {
-            candidatesTokenCount = usage["candidatesTokenCount"].asInt();
-            if (candidatesTokenCount >= 100)
-              cerr << "Summary is more than 50 Words" << endl;
-          }
-        }
-        if (root.isMember("modelVersion") && root["modelVersion"].isString()) {
-          modelVersion = root["modelVersion"].asString();
-        }
-      } else {
-        cerr << "Error: Could not parse JSON response." << endl;
-        logMessage("Error: Could not parse JSON response.");
-        cerr << "Response: " << response << endl; // Print the full response for // debugging
-      }
-   result.summaryText = summaryText;
-   result.promptTokenCount = promptTokenCount;
-   result.candidatesTokenCount = candidatesTokenCount;
-   result.modelVersion = modelVersion;
-
-    } catch (const Json::LogicError &e) {
-      cerr << "JSON parsing error: " << e.what() << endl;
-      logMessage("JSON parsing error: " + string(e.what()));
-      cerr << "Response: " << response << endl; // Print the full response for debugging
-    }
-  }  else {
-        cerr << "\nCurl request failed: \n" << curl_easy_strerror(res) << endl;
-        logMessage("Curl request failed: " + string(curl_easy_strerror(res)));
-        cerr<<"\nCurl request failed\n"; 
+    } else {
+        string err = "Curl request failed: " + string(curl_easy_strerror(res));
+        cerr << err << endl;
+        logger.log(ERROR, err);
     }
 
-  curl_easy_cleanup(curl);
-  curl_slist_free_all(headers);
+    curl_easy_cleanup(curl);
+    curl_slist_free_all(headers);
 
-  logMessage("Output summary: " + result.summaryText); // Log output summary  
-  
-  return result;                          // Return the extracted summary text
+    logger.log(INFO, "Output summary: " + result.summaryText);
+    return result;
 }
-//     return response;
 
+//---------------------------------------------------------------------
+// Main Function
+//---------------------------------------------------------------------
 int main() {
-    // Opening the log file here, at the beginning of main
-    logFile.open("summarizerApp.log", ios::app);
-    cout<<"We are on like babylon\n";
-    if (!logFile.is_open()) {
-        char er;
-        cerr << "\nError: Could not open log file, logging not possible do you still want to proceed(Y/N):\n" << endl;
-        cin >> er;
-        if (tolower(er) != 'y') { 
-            cerr << "\nProgram terminated by user.\n" << endl;
-            exit(1); // Exit the program immediately
-        }
-        // If the user chooses to proceed, we still don't have logging.
+    logger.log(INFO, "Program started.");
+
+    // Display the current working directory.
+    char cwd[PATH_MAX];
+    if (getcwd(cwd, sizeof(cwd)) != nullptr) {
+        cout << "\nCurrent working directory: " << cwd << endl;
+    } else {
+        string err = "Error getting current working directory";
+        cerr << err << endl;
+        logger.log(ERROR, err);
     }
-    
-    SummaryResult summaryResult; 
 
-  char cwd[PATH_MAX];
-  if (getcwd(cwd, sizeof(cwd))!= nullptr) {
-    cout << "\nCurrent working directory: \n"
-         << cwd << std::endl;
-  } else {
-    cerr << "\nError getting current working directory\n" << std::endl;
-  }
+    string emailContent, pdfText;
 
-  string emailContent, pdfText;
+    cout << "\n===== Gemini Text Summarizer =====\n" << endl;
 
-  cout << "\n===== Gemini Text Summarizer =====\n" << endl;
+    cout << "\nEnter Email Content (or leave empty if using email.txt file): \n";
+    getline(cin, emailContent);
+    if (emailContent.empty()) {
+        cout << "\nReading email content from email.txt...\n" << endl;
+        emailContent = readTextFile("email.txt");
+    }
 
-  cout << "\nEnter Email Content (or leave empty if using email.txt file): \n";
-  getline(cin, emailContent);
+    cout << "\nEnter PDF Text Content (or leave empty if using pdf.txt file): \n";
+    getline(cin, pdfText);
+    if (pdfText.empty()) {
+        cout << "\nReading PDF text from pdf.txt...\n" << endl;
+        pdfText = readTextFile("pdf.txt");
+    }
 
-  if (emailContent.empty()) {
-    cout << "\nReading email content from email.txt...\n" << endl;
-    emailContent = readTextFile("email.txt");
-  }
+    if (emailContent.empty() && pdfText.empty()) {
+        string err = "Error: No content provided for summarization!";
+        cout << err << endl;
+        logger.log(ERROR, err);
+        return 1;
+    }
 
-  cout << "\nEnter PDF Text Content (or leave empty if using pdf.txt file): \n";
-  getline(cin, pdfText);
+    // Combine the two text inputs with an instruction.
+    string combinedText = "Summarise this in 50 words or less: " + emailContent + " " + pdfText;
 
-  if (pdfText.empty()) {
-    cout << "\nReading PDF text from pdf.txt...\n" << endl;
-    pdfText = readTextFile("pdf.txt");
-  }
+    cout << "\nSummarizing...\n" << endl;
+    atomic<bool> done(false);
+    thread loadingThread(displayLoadingAnimation, ref(done));
 
-  if (emailContent.empty() && pdfText.empty()) {
-    cout << "\nError: No content provided for summarization!\n" << endl;
-    logMessage("Error: No content provided for summarization!");
-    return 1;
-  }
+    SummaryResult summary = summarizeText(combinedText);
 
-  string combinedText =
-      "Summarise this in 50 word or less: " + emailContent + " " + pdfText;
+    done = true; // Stop the loading animation
+    loadingThread.join();
 
-  cout << "\nSummarizing...\n" << endl;
-  atomic<bool> done(false);
-  thread loadingThread(displayLoadingAnimation, ref(done));
+    cout << "\nSummary: " << summary.summaryText << endl;
+    logger.log(INFO, "Final Summary: " + summary.summaryText);
+    logger.log(INFO, "Program finished.");
 
-  SummaryResult summary = summarizeText(combinedText);
-
-  done = true; // Signal the loading thread to stop
-  loadingThread.join();
-
-  cout << "\nSummary: " << summary.summaryText << endl;
-  // Log the summary
-  logMessage("Final Summary: " + summary.summaryText);
-      
-if (logFile.is_open())
-    logFile.close();
-  return 0;
+    return 0;
 }
