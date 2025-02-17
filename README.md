@@ -86,7 +86,10 @@ const string API_URL = "https://generativelanguage.googleapis.com/v1beta/models/
 ## Logging
 
 The application logs input text, output summaries, and any errors to the `summarizer-app.log` file in the same directory as the executable.- Log File:
-- All logs are written to ../summarizer-app.log. Adjust the path if needed.
+- All logs are written to
+  ```bash
+  ../summarizer-app.log. #Adjust the path if needed.
+  ```
 
 
 
