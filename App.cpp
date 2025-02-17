@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <thread>
-#include <cassert>
 #include <chrono>
 #include <fstream>
 #include <sstream>
@@ -11,8 +10,6 @@
 #include <json/json.h>
 #include <atomic>      // For atomic<bool>
 #include <ctime>       // For time_t, time, and ctime
-#include <iomanip>     // For put_time
-#include <cctype>      // For tolower
 
 using namespace std;
 
