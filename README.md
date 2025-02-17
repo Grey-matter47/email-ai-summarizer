@@ -1,78 +1,119 @@
-# email-ai-summarizer
-Building a C++ App to Summarize Emails with Gemini 2.0 Flash
-# C++ Email Summarizer with Gemini 2.0 Flash
-- A C++ application that summarizes an email and attached PDF (as .txt) in ≤ 50 words using the Gemini 2.0 Flash API.
-- Includes unit tests (Google Test) and logs input/output for validation.
+# Gemini Summarizer
 
-# Features
-- ✔ Reads email text (email.txt) and attachment text (attachment.txt)
-- ✔ Calls Gemini 2.0 Flash API for AI-powered summarization
-- ✔ Limits summary output to ≤ 50 words
-- ✔ Logs inputs & outputs for traceability (logs/input_log.txt, logs/output_log.txt)
-- ✔ Includes unit tests for correctness (gtest framework)
-- ✔ Automated CI tests on GitHub
+## Overview
 
-# 📂 Project Structure
-```bash
-📂 cpp-email-summarizer
-│── 📄 main.cpp           # Main program
-│── 📄 gemini_api.cpp     # Handles API calls
-│── 📄 gemini_api.h       # API function declarations
-│── 📄 file_handler.cpp   # Reads email & PDF (txt)
-│── 📄 file_handler.h     # File handling declarations
-│── 📄 tests.cpp          # Unit tests (Google Test)
-│── 📂 data
-│   ├── email.txt         # Sample email input
-│   ├── attachment.txt    # Sample attachment input
-│── 📂 logs
-│   ├── input_log.txt     # Stores input logs
-│   ├── output_log.txt    # Stores API response summaries
-│── 📄 CMakeLists.txt     # Build system config
-│── 📄 README.md          # Instructions & Setup
-```
-# Installation & Setup
-- 1 Clone the Repository
+The **Gemini Summarizer** is a C++ command-line application that leverages the Gemini API to generate concise summaries from text inputs. It is designed to handle inputs from various sources—such as emails and PDFs—and comes equipped with a suite of tests to validate its functionality. Additionally, the application includes a logging mechanism to record events, errors, and test outcomes.
+
+## Features
+
+- **Text Summarization:** Uses the Gemini API to produce concise summaries.
+- **Interactive CLI:** Offers a menu-driven interface for running the summarizer or tests.
+- **Loading Animation:** Displays an animation while waiting for API responses.
+- **Logging:** Logs key events and errors to a log file.
+- **Robust Testing:** Includes tests for:
+  - Valid inputs
+  - Empty inputs
+  - Inputs with special characters
+  - API error simulations
+  - JSON parsing error simulations
+  - Maximum output token limit enforcement
+  - File integration (email and PDF content)
+  - File-not-found scenarios
+
+## Prerequisites
+
+- **C++ Compiler:** Must support C++17.
+- **CMake:** Version 3.10 or later.
+- **cURL:** Library for making HTTP requests.
+- **JsonCpp:** Library for JSON parsing and handling.
+
+## Build Instructions
+
+1. **Clone the Repository**
+
 ```bash
 git clone https://github.com/your-username/cpp-email-summarizer.git
 cd cpp-email-summarizer
 ```
+2. **Create a Build Directory and Generate Build Files and Compile the Application**
 
-# Unit Tests for Text Summarizer
+```bash
+mkdir build
+cd build
+cmake ..
+make
+```
+- This process generates an executable named App.
+- If the Build already exists use : 
+```bash 
+rm -rf build        #Run in the Root Directory
+```
+## Running the Application
 
-This directory contains unit and integration tests for the C++ text summarizer application.
+- Run the executable from the build directory:
 
-## Running Tests
+```bash
+./App
+```
+- Upon running, you will be presented with a menu:
 
-To run the tests, you'll need a C++ testing framework (like Google Test).  Compile and link the test files with the testing framework and your application code.  Then, execute the resulting test executable.
+- 1: Run the summarizer (prompts for email and PDF content, or reads from text files).
+- 2: Execute the integrated test cases.
+- 3: Quit the application.
 
-## Test Files
+## Test Cases
 
-### `readTextFile_test.cpp`
+### The application provides multiple tests to ensure robust functionality:
 
-*   **`TestReadFileExists`:** Tests `readTextFile` with a valid filename (`test_data/valid_input.txt`). Verifies that the function reads the file content correctly.
-*   **`TestReadFileDoesNotExist`:** Tests `readTextFile` with a non-existent filename. Verifies that the function returns an empty string and logs an error message.
-*   **`TestReadEmptyFile`:** Tests `readTextFile` with an empty file (`test_data/empty_file.txt`). Verifies that an empty string is returned and no error is logged.
-*   **`TestReadFileWithSpecialChars`:** Tests `readTextFile` with a file containing special characters (`test_data/special_chars.txt`). Verifies correct handling of special characters.
-*   **`TestReadLargeFile`:** Tests `readTextFile` with a large file (`test_data/large_file.txt`). Verifies that the function can handle large files without issues.
+- Valid Input Test: Verifies summarization with a proper input text.
+- Empty Input Test: Checks behavior when no content is provided.
+- Special Characters Test: Ensures correct handling of inputs containing special characters.
+- API Error Simulation: Tests error handling by simulating a faulty API endpoint.
+- JSON Parsing Error Simulation: Simulates and catches JSON parsing errors.
+- Max Output Tokens Limit Test: Ensures that the summary does not exceed a predefined token limit.
+- Integration Tests:
+- TestEmailPdfSummarization: Combines content from email.txt and pdf.txt for summarization.
+- TestFileNotFound: Validates behavior when expected input files are missing.
 
-### `summarizeText_test.cpp`
+## Configuration
 
-*   **`TestSummarizeValidInput`:** Tests `summarizeText` with valid input text.  Uses a mocked API response.  Verifies that a non-empty summary is returned.
-*   **`TestSummarizeEmptyInput`:** Tests `summarizeText` with an empty input string. Verifies that the function handles this gracefully.
-*   **`TestSummarizeInputWithSpecialChars`:** Tests `summarizeText` with input containing special characters. Uses a mocked API response. Verifies correct handling of special characters.
-*   **`TestSummarizeInputWithDifferentLengths`:** Tests `summarizeText` with short, medium, and long input texts. Uses mocked API responses.
-*   **`TestSummarizeApiError`:**  Tests `summarizeText` with a mocked API error response. Verifies that an appropriate error message is logged.
-*   **`TestSummarizeJsonParsingError`:** Tests `summarizeText` with a mocked malformed JSON response. Verifies that a JSON parsing error is logged.
-*   **`TestTokenCountCheck`:**  Tests if the `promptTokenCount` and `candidatesTokenCount` in the response are within reasonable limits. Uses a mocked API response.
-*   **`TestMaxOutputTokensLimit`:**  Tests if the `max_output_tokens` parameter is respected. Uses a mocked API response.
-*   **`TestModelVersionCheck`:**  Tests if the returned `modelVersion` matches the expected value. Uses a mocked API response.
-
-### `integration_test.cpp`
-
-*   **`TestEmailPdfSummarization`:** Tests the entire summarization flow with sample `email.txt` and `pdf.txt` files.
-*   **`TestEmptyFiles`:** Tests the integration when either or both input files are empty.
-*   **`TestFileNotFound`:** Tests the integration when one or both input files do not exist.
-
+- API Key & Endpoint:
+- The application uses a hardcoded API key and endpoint for the Gemini API. You can update these values in App.cpp as needed:
+```bash
+const string API_KEY = "YOUR_API_KEY"; // use your own API_KEY
+const string API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" + API_KEY;
+```
 ## Logging
 
-The application logs input text, output summaries, and any errors to the `summarizer-app.log` file in the same directory as the executable.
+The application logs input text, output summaries, and any errors to the `summarizer-app.log` file in the same directory as the executable.- Log File:
+- All logs are written to ../summarizer-app.log. Adjust the path if needed.
+
+
+
+# 📂 Project Structure
+
+```bash
+.📂 email-ai-summarizer
+├── 📂 build            # Build of Main application code and test cases available only after you create it
+├── 📄 App.cpp          # Main application code and test cases
+├── 📄 CMakeLists.txt   # CMake build configuration
+├── 📄 email.txt        # (Optional) Sample email text input
+├── 📄 pdf.txt          # (Optional) Sample PDF text input
+└── 📄 README.md        # Project documentation
+```
+## Troubleshooting
+- cURL Initialization Errors: Ensure the cURL library is installed and correctly linked.
+- JsonCpp Issues: Confirm that the JsonCpp library is installed.
+- File Not Found: Verify that email.txt and pdf.txt are in the expected directory relative to the executable.
+- API Key Errors: Make sure the API key and endpoint are valid.
+
+## License
+- This project is provided "as is" without any warranty. 
+
+## Contributing
+- Contributions are welcome! If you wish to improve or extend the project, please fork the repository and submit a pull request with your changes.
+
+## Acknowledgements
+- cURL
+- JsonCpp
+- CMake
